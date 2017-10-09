@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+
+  server:
+    build:
+      context: ./server
+    environment:
+      DEBUG: socket.io*
+    depends_on:
+      - traefik
+    deploy:
+      labels:
+        - "traefik.backend=socketio"
+        - "traefik.frontend.rule=Host:socketio.ffaerber.com"
+        - "traefik.port=3000"
+      placement:
+        constraints:
+          - node.hostname == pi2
