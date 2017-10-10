@@ -1,18 +1,15 @@
 version: '3.2'
 
 networks:
-  backend:
-  home_frontend:
+  home_backend:
     external: true
 
 services:
 
   server:
     image: ffaerber/monsterborg-controller-server:latest
-    environment:
-      DEBUG: socket.io*
     networks:
-      - backend
+      - home_backend
     deploy:
       labels:
         - "traefik.backend=socketio"

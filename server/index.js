@@ -1,10 +1,13 @@
-var io = require('socket.io')();
-console.log('starting...')
-io.on('connection', (socket) => {
-  console.log('connected')
-  socket.on('message', (message) => {
-    console.log(message);
+var server = require('http').createServer();
+var io = require('socket.io')(server);
+io.on('connection', function(socket){
+  console.log('connected ...')
+  socket.on('event', (data) =>{
+    io.emit('event', data);
+  });
+  socket.on('disconnect', function(){
+    console.log('disconnect')
   });
 });
+server.listen(3000);
 
-io.listen(3000);
