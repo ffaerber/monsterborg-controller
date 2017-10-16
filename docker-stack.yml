@@ -18,3 +18,16 @@ services:
       placement:
         constraints:
           - node.hostname == pi2
+
+  rtmp:
+    image: ffaerber/monsterborg-controller-rtmp:latest
+    networks:
+      - home_backend
+    deploy:
+      labels:
+        - "traefik.backend=rtmp"
+        - "traefik.frontend.rule=Host:rtmp.ffaerber.com"
+        - "traefik.port=8000"
+      placement:
+        constraints:
+          - node.hostname == pi2
