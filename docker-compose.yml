@@ -1,0 +1,22 @@
+version: '3.2'
+
+
+services:
+
+  gui:
+    build:
+      context: ./gui
+      dockerfile: Dockerfile.dev
+    environment:
+      NODE_ENV: development
+      GROUND_STATION_HOST: http://server
+    ports:
+      - "3000:3000"
+    volumes:
+      # - './:/usr/src/app'
+      - '/usr/src/app/node_modules'
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
